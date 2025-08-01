@@ -1,6 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 
+// Process component for "How We Build for Scale" section
 const Process: React.FC = () => {
   const steps = [
     {
