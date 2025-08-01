@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.6;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-electric text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:bg-blue-600 hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl;
+  }
+  
+  .btn-secondary {
+    @apply bg-transparent border-2 border-electric text-electric px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:bg-electric hover:text-white hover:scale-105 active:scale-95;
+  }
+  
+  .form-input {
+    @apply w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-electric focus:outline-none transition-colors duration-300 bg-white text-charcoal;
+  }
+  
+  .form-label {
+    @apply block text-sm font-semibold text-charcoal mb-2;
+  }
+  
+  .section-padding {
+    @apply px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24;
+  }
+} 
