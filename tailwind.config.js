@@ -11,6 +11,10 @@ export default {
         electric: '#2979FF',
         slate: '#6E6E6E',
         accent: '#B2FF59',
+        'mag-yellow': '#FFC500',
+        'mag-orange': '#F36F3D',
+        'mag-dark': '#1A1A1A',
+        'mag-gray': '#4A4A4A',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
