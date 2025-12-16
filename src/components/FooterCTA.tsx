@@ -18,12 +18,12 @@ const FooterCTA: React.FC<FooterCTAProps> = ({ onLetsBuild }) => {
           className="mb-12"
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-white mb-8 tracking-tight">
-            Design that scales.
+            Transformational Growth
             <br />
-            Technology that sells.
+            Across the Amazon Ecosystem
           </h2>
           <p className="text-lg text-gray-300 max-w-2xl mx-auto font-light leading-relaxed">
-            Ready to build something exceptional? Let's create the systems that power your business growth.
+            Ready to scale your Amazon presence? Let's create connected strategies that drive measurable results.
           </p>
         </motion.div>
 
@@ -38,7 +38,7 @@ const FooterCTA: React.FC<FooterCTAProps> = ({ onLetsBuild }) => {
             onClick={onLetsBuild}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="bg-blue-600 text-white px-8 py-4 rounded-full font-medium text-lg hover:bg-blue-700 transition-colors duration-300 shadow-lg hover:shadow-xl"
+            className="bg-teal-600 text-white px-8 py-4 rounded-full font-medium text-lg hover:bg-teal-700 transition-colors duration-300 shadow-lg hover:shadow-xl"
           >
             Let's Build Together
           </motion.button>

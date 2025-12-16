@@ -5,28 +5,34 @@ import { motion } from 'framer-motion'
 const Process: React.FC = () => {
   const steps = [
     {
-      title: 'Discovery',
-      description: 'We analyze your brand, goals, and infrastructure to define what to build.',
-      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      details: 'Deep dive into your current tech stack, business objectives, and growth opportunities. We identify the gaps and opportunities that will drive your digital transformation.'
+      title: 'Business Goals',
+      description: 'Understanding the role of retail media aligning on KPI\'s, tactics, and approach.',
+      image: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      details: 'We start by understanding your corporate goals and how retail media fits into your overall strategy. We align on KPIs, tactics, and approach to ensure every decision supports your business objectives.'
     },
     {
-      title: 'Design Systems',
-      description: 'We create scalable UI, user flows, and monetization architecture.',
-      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      details: 'Architect user experiences that convert. We design interfaces that not only look beautiful but are engineered to drive business outcomes and user engagement.'
+      title: 'Budgets and Mix',
+      description: 'Full funnel media mix and budget planning that aligns with business needs.',
+      image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      details: 'Strategic budget allocation across the full marketing funnel. We plan media mix and budgets that align with your business needs and maximize ROI at every stage of the customer journey.'
     },
     {
-      title: 'Engineering',
-      description: 'We develop custom platforms, APIs, and automations around your business.',
-      image: 'https://images.unsplash.com/photo-1556745753-b2904692b3cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      details: 'Build with modern technologies that scale. We develop robust, secure, and performant systems that grow with your business and adapt to changing needs.'
+      title: 'Tactics and Execution',
+      description: 'Tactics, ad types, placements, and targets informed by retail media goals, mix and budget.',
+      image: 'https://images.unsplash.com/photo-1607082349566-187342175e2f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      details: 'Precision execution of tactics, ad types, placements, and targeting strategies. Every campaign is informed by your retail media goals, budget allocation, and media mix to drive optimal performance.'
     },
     {
-      title: 'Optimization',
-      description: 'We launch, track, test, and evolve your stack for maximum performance.',
-      image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      details: 'Continuous improvement through data-driven insights. We monitor performance, analyze user behavior, and optimize every touchpoint for maximum ROI.'
+      title: 'Measuring Success',
+      description: 'KPI driven approach to support business goals.',
+      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      details: 'Data-driven measurement and analysis. We track KPIs that directly support your business goals, providing clear visibility into performance and ROI across all campaigns.'
+    },
+    {
+      title: 'Analyze and Iterate',
+      description: 'Test, analyze, plan ongoing optimizations and consistent realignment of tactics.',
+      image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      details: 'Continuous optimization through testing and analysis. We plan ongoing optimizations and consistently realign tactics to ensure retail media adaptations that keep you ahead of the competition.'
     }
   ]
 
@@ -63,10 +69,10 @@ const Process: React.FC = () => {
           className="text-center mb-20"
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-gray-900 mb-6 tracking-tight">
-            How We Build for Scale
+            Right Image Way
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto font-light">
-            A structured framework to move from insight to infrastructure.
+            A proven methodology for Amazon success
           </p>
         </motion.div>
 
@@ -100,7 +106,7 @@ const Process: React.FC = () => {
                     {/* Content Overlay */}
                     <div className="absolute inset-0 flex items-end p-6 lg:p-8">
                       <div className="text-white">
-                        <h3 className="text-2xl lg:text-3xl font-medium mb-3 group-hover:text-blue-300 transition-colors duration-300">
+                        <h3 className="text-2xl lg:text-3xl font-medium mb-3 group-hover:text-teal-300 transition-colors duration-300">
                           {step.title}
                         </h3>
                         <p className="text-gray-200 font-light leading-relaxed text-sm lg:text-base">
@@ -127,16 +133,16 @@ const Process: React.FC = () => {
                       {/* Key Benefits */}
                       <div className="space-y-3">
                         <div className="flex items-center gap-3">
-                          <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
-                          <span className="text-sm font-medium text-gray-700">Scalable Architecture</span>
+                          <div className="w-2 h-2 bg-teal-600 rounded-full"></div>
+                          <span className="text-sm font-medium text-gray-700">Data-Driven</span>
                         </div>
                         <div className="flex items-center gap-3">
-                          <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
-                          <span className="text-sm font-medium text-gray-700">Performance Optimized</span>
+                          <div className="w-2 h-2 bg-teal-600 rounded-full"></div>
+                          <span className="text-sm font-medium text-gray-700">KPI Focused</span>
                         </div>
                         <div className="flex items-center gap-3">
-                          <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
-                          <span className="text-sm font-medium text-gray-700">Business Focused</span>
+                          <div className="w-2 h-2 bg-teal-600 rounded-full"></div>
+                          <span className="text-sm font-medium text-gray-700">Results Oriented</span>
                         </div>
                       </div>
                     </div>
@@ -156,10 +162,10 @@ const Process: React.FC = () => {
           className="text-center mt-20 pt-16 border-t border-gray-200"
         >
           <h3 className="text-2xl font-medium text-gray-900 mb-4">
-            Measurable Infrastructure
+            Amazon Marketing Funnel
           </h3>
           <p className="text-gray-600 font-light max-w-2xl mx-auto">
-            Every system is designed to scale with your business and deliver quantifiable results.
+            Sponsored Brands to build top-of-funnel awareness. Sponsored Products to capture high-intent conversions. Sponsored Display introduced later, once Sponsored Products opportunities are fully leveraged.
           </p>
         </motion.div>
       </div>

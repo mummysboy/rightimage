@@ -9,35 +9,35 @@ const Results: React.FC = () => {
   const projects = [
     {
       id: 1,
-      title: 'Nova Financial',
-      category: 'Brand Identity',
-      description: 'Complete visual system for a next-generation fintech platform.',
-      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+      title: 'Category Keyword Dominance',
+      category: 'Keyword Strategy',
+      description: 'Category keywords dominate clicks as ads drive impressions and conversions across the Amazon ecosystem.',
+      image: 'https://images.unsplash.com/photo-1607082349566-187342175e2f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
       metrics: [
-        { label: 'Brand Recognition', value: 340, suffix: '%' },
-        { label: 'User Engagement', value: 62, suffix: '%' }
+        { label: 'Share of Voice', value: 340, suffix: '%' },
+        { label: 'Click Growth', value: 62, suffix: '%' }
       ]
     },
     {
       id: 2,
-      title: 'Echo Campaign',
-      category: 'Performance Marketing',
-      description: 'Multi-channel campaign system driving sustainable growth.',
-      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+      title: 'NTB Acquisition',
+      category: 'New to Brand',
+      description: 'Driving spend away from branded keywords into category keywords for New to Brand customer acquisition.',
+      image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
       metrics: [
-        { label: 'Conversion Rate', value: 127, suffix: '%' },
-        { label: 'ROI', value: 240, suffix: '%' }
+        { label: 'NTB Rate', value: 127, suffix: '%' },
+        { label: 'ROAS', value: 240, suffix: '%' }
       ]
     },
     {
       id: 3,
-      title: 'Pulse Platform',
-      category: 'Custom Tech',
-      description: 'Scalable infrastructure powering real-time analytics.',
-      image: 'https://images.unsplash.com/photo-1556745753-b2904692b3cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+      title: 'Sales Velocity Optimization',
+      category: 'Performance',
+      description: 'Driving sales velocity where competitors are not, spending where competition is lowest to drive incremental sales.',
+      image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
       metrics: [
-        { label: 'Uptime', value: 99.9, suffix: '%' },
-        { label: 'Performance', value: 38, suffix: '% faster' }
+        { label: 'Organic Sales', value: 99.9, suffix: '%' },
+        { label: 'Ranking Improvement', value: 38, suffix: '%' }
       ]
     }
   ]
@@ -67,7 +67,7 @@ const Results: React.FC = () => {
     }, [isInView, value])
 
     return (
-      <span className="text-3xl font-medium text-blue-600">
+      <span className="text-3xl font-medium text-teal-600">
         {count}{suffix}
       </span>
     )
@@ -106,10 +106,10 @@ const Results: React.FC = () => {
           className="text-center mb-20"
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-gray-900 mb-6 tracking-tight">
-            Results
+            Data Analysis Drives Brand Strategies
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto font-light">
-            Real projects with measurable business impact.
+            KPI-driven insights that power transformational growth on Amazon.
           </p>
         </motion.div>
 
@@ -141,7 +141,7 @@ const Results: React.FC = () => {
                 {/* Content */}
                 <div className="p-6">
                   <div className="mb-3">
-                    <span className="text-xs font-medium text-blue-600 uppercase tracking-wider">
+                    <span className="text-xs font-medium text-teal-600 uppercase tracking-wider">
                       {project.category}
                     </span>
                   </div>

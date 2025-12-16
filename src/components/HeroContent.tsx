@@ -1,5 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
 import { ChevronDown } from 'lucide-react'
 
 interface HeroContentProps {
@@ -9,19 +10,16 @@ interface HeroContentProps {
 
 const HeroContent: React.FC<HeroContentProps> = ({ onBookCall, onExplorePlatform }) => {
   return (
-    <div className="relative z-10 flex items-center justify-center h-full">
+    <div className="relative z-10 flex items-center justify-center h-full pointer-events-auto">
       <div className="text-center text-white px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
         {/* Main Headline */}
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.2 }}
-          className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-8 leading-tight tracking-tight"
+          className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-light mb-8 leading-tight tracking-tight"
         >
-          We Engineer the Digital{' '}
-          <span className="text-blue-400 font-bold">Backbone</span>
-          <br />
-          for Ambitious Brands.
+          RIGHT IMAGE DIGITAL
         </motion.h1>
 
         {/* Subheadline */}
@@ -31,7 +29,7 @@ const HeroContent: React.FC<HeroContentProps> = ({ onBookCall, onExplorePlatform
           transition={{ duration: 1, delay: 0.6 }}
           className="text-lg sm:text-xl lg:text-2xl text-gray-200 mb-12 max-w-4xl mx-auto leading-relaxed font-light"
         >
-          From AI-powered campaigns to revenue automation, Right Image Digital builds software systems that power brand growth.
+          We provide connected strategies across the entire Amazon ecosystem to help our clients achieve transformational growth
         </motion.p>
 
         {/* CTA Buttons */}
@@ -45,7 +43,8 @@ const HeroContent: React.FC<HeroContentProps> = ({ onBookCall, onExplorePlatform
             onClick={onBookCall}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+            className="bg-teal-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-teal-700 transition-all duration-300 shadow-lg hover:shadow-xl relative z-20 cursor-pointer"
+            type="button"
           >
             Book a Discovery Call
           </motion.button>
@@ -54,9 +53,10 @@ const HeroContent: React.FC<HeroContentProps> = ({ onBookCall, onExplorePlatform
             onClick={onExplorePlatform}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white/10 transition-all duration-300"
+            className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white/10 transition-all duration-300 relative z-20 cursor-pointer"
+            type="button"
           >
-            Explore Our Platform Capabilities
+            Explore Our Services
           </motion.button>
         </motion.div>
 

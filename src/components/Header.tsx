@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 
 const Header: React.FC = () => {
@@ -16,11 +17,10 @@ const Header: React.FC = () => {
   }, [])
 
   const navItems = [
-    { name: 'Platform', href: '#platform' },
-    { name: 'Solutions', href: '#solutions' },
-    { name: 'Integrations', href: '#integrations' },
-    { name: 'Results', href: '#results' },
-    { name: 'Contact', href: '#contact' }
+    { name: 'Services', href: '/services' },
+    { name: 'Approach', href: '/approach' },
+    { name: 'Results', href: '/results' },
+    { name: 'Contact', href: '/contact' }
   ]
 
   return (
@@ -28,7 +28,7 @@ const Header: React.FC = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.8 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${
         isScrolled 
           ? 'bg-white/95 backdrop-blur-md shadow-sm' 
           : 'bg-transparent'
@@ -41,29 +41,61 @@ const Header: React.FC = () => {
             whileHover={{ scale: 1.05 }}
             className="flex-shrink-0"
           >
-            <a href="#" className="text-xl lg:text-2xl font-light tracking-wider text-gray-900">
-              Right Image Digital
-            </a>
+            <Link to="/" className="group flex items-center space-x-3 relative z-[110] cursor-pointer">
+              {/* Logo Image */}
+              <div className="relative">
+                <img 
+                  src="/logo.png" 
+                  alt="Right Image Digital" 
+                  className="h-10 lg:h-12 w-auto rounded-lg object-contain shadow-sm"
+                />
+              </div>
+              {/* Logo Text */}
+              <div className="flex flex-col">
+                <span className={`text-lg lg:text-xl font-semibold tracking-tight transition-colors ${
+                  isScrolled ? 'text-gray-900 group-hover:text-teal-600' : 'text-white group-hover:text-teal-300'
+                }`}>
+                  Right Image
+                </span>
+                <span className={`text-xs lg:text-sm font-light tracking-wider uppercase transition-colors ${
+                  isScrolled ? 'text-gray-600' : 'text-gray-200'
+                }`}>
+                  Digital
+                </span>
+              </div>
+            </Link>
           </motion.div>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8">
             {navItems.map((item) => (
-              <motion.a
+              <motion.div
                 key={item.name}
-                href={item.href}
                 whileHover={{ y: -2 }}
-                className="text-sm font-medium tracking-wide uppercase text-gray-900 hover:text-blue-600 transition-colors duration-300"
               >
-                {item.name}
-              </motion.a>
+                <Link
+                  to={item.href}
+                  className={`text-sm font-medium tracking-wide uppercase transition-colors duration-300 relative z-[110] cursor-pointer ${
+                    isScrolled 
+                      ? 'text-gray-900 hover:text-teal-600' 
+                      : 'text-white hover:text-teal-300'
+                  }`}
+                >
+                  {item.name}
+                </Link>
+              </motion.div>
             ))}
           </nav>
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 rounded-md text-gray-900 hover:text-blue-600 transition-colors duration-300"
+            className={`lg:hidden p-2 rounded-md transition-colors duration-300 relative z-[110] cursor-pointer ${
+              isScrolled 
+                ? 'text-gray-900 hover:text-teal-600' 
+                : 'text-white hover:text-teal-300'
+            }`}
+            type="button"
           >
             {isMobileMenuOpen ? (
               <X className="w-6 h-6" />
@@ -81,21 +113,24 @@ const Header: React.FC = () => {
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
-              className="lg:hidden bg-white/95 backdrop-blur-md border-t border-gray-200"
+              className="lg:hidden bg-white/95 backdrop-blur-md border-t border-gray-200 relative z-[110]"
             >
               <nav className="px-4 py-6 space-y-4">
                 {navItems.map((item, index) => (
-                  <motion.a
+                  <motion.div
                     key={item.name}
-                    href={item.href}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    className="block text-lg font-medium tracking-wide uppercase text-gray-900 hover:text-blue-600 transition-colors duration-300"
-                    onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    {item.name}
-                  </motion.a>
+                    <Link
+                      to={item.href}
+                      className="block text-lg font-medium tracking-wide uppercase text-gray-900 hover:text-teal-600 transition-colors duration-300 relative z-[110] cursor-pointer"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {item.name}
+                    </Link>
+                  </motion.div>
                 ))}
               </nav>
             </motion.div>

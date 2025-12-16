@@ -22,7 +22,7 @@ const Hero: React.FC<HeroProps> = ({ onExploreWork }) => {
             repeat: Infinity, 
             ease: "easeInOut" 
           }}
-          className="absolute top-1/4 right-1/4 w-64 h-64 bg-blue-50 rounded-full blur-3xl"
+          className="absolute top-1/4 right-1/4 w-64 h-64 bg-teal-50 rounded-full blur-3xl"
         />
         <motion.div
           animate={{ 
@@ -35,7 +35,7 @@ const Hero: React.FC<HeroProps> = ({ onExploreWork }) => {
             ease: "easeInOut",
             delay: 2
           }}
-          className="absolute bottom-1/3 left-1/3 w-96 h-96 bg-blue-50 rounded-full blur-3xl"
+          className="absolute bottom-1/3 left-1/3 w-96 h-96 bg-teal-50 rounded-full blur-3xl"
         />
       </div>
 
@@ -48,8 +48,7 @@ const Hero: React.FC<HeroProps> = ({ onExploreWork }) => {
           transition={{ duration: 1, delay: 0.2 }}
           className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-light text-gray-900 mb-8 leading-tight tracking-tight"
         >
-          We build brands that{' '}
-          <span className="text-blue-600 font-normal">perform</span>
+          RIGHT IMAGE DIGITAL
         </motion.h1>
 
         {/* Subheadline */}
@@ -59,7 +58,7 @@ const Hero: React.FC<HeroProps> = ({ onExploreWork }) => {
           transition={{ duration: 1, delay: 0.6 }}
           className="text-xl sm:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed font-light"
         >
-          Right Image Digital designs identities and builds custom platforms that help modern businesses scale.
+          We provide connected strategies across the entire Amazon ecosystem to help our clients achieve transformational growth
         </motion.p>
 
         {/* CTA Button */}
@@ -73,7 +72,7 @@ const Hero: React.FC<HeroProps> = ({ onExploreWork }) => {
             onClick={onExploreWork}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="text-blue-600 border border-blue-600 px-8 py-3 rounded-full font-medium text-lg hover:bg-blue-600 hover:text-white transition-all duration-300"
+            className="text-teal-600 border border-teal-600 px-8 py-3 rounded-full font-medium text-lg hover:bg-teal-600 hover:text-white transition-all duration-300"
           >
             Explore Our Work
           </motion.button>

@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import Header from './Header'
 import HeroCarousel from './HeroCarousel'
 import Capabilities from './Capabilities'
@@ -7,19 +8,18 @@ import Results from './Results'
 import FooterCTA from './FooterCTA'
 
 const HomePage: React.FC = () => {
+  const navigate = useNavigate()
+
   const handleBookCall = () => {
-    // Navigate to booking/contact form
-    console.log('Book discovery call clicked')
+    navigate('/contact')
   }
 
   const handleExplorePlatform = () => {
-    // Navigate to platform capabilities section
-    console.log('Explore platform capabilities clicked')
+    navigate('/services')
   }
 
   const handleLetsBuild = () => {
-    // Navigate to contact form
-    console.log('Let\'s build clicked')
+    navigate('/contact')
   }
 
   return (

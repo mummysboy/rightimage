@@ -3,7 +3,23 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { motion } from 'framer-motion'
-import { Send, Mail, User, MessageSquare, Calendar, Target } from 'lucide-react'
+import { 
+  Send, 
+  Mail, 
+  User, 
+  MessageSquare, 
+  Calendar, 
+  Target, 
+  Hand, 
+  MapPin, 
+  FolderOpen, 
+  Palette, 
+  Megaphone, 
+  TrendingUp, 
+  Settings, 
+  Brain,
+  LucideIcon
+} from 'lucide-react'
 import { FormData } from './ContactPage'
 
 interface ContactFormProps {
@@ -34,11 +50,11 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, quizAnswers }) => {
 
   const selectedService = watch('service')
 
-  const services = [
-    { value: 'branding', label: 'Branding & Identity', icon: '🎨' },
-    { value: 'campaign', label: 'Campaign Strategy', icon: '📢' },
-    { value: 'performance', label: 'Performance Marketing', icon: '📈' },
-    { value: 'tech', label: 'Custom Tech Solutions', icon: '⚙️' },
+  const services: Array<{ value: string; label: string; icon: LucideIcon }> = [
+    { value: 'branding', label: 'Branding & Identity', icon: Palette },
+    { value: 'campaign', label: 'Campaign Strategy', icon: Megaphone },
+    { value: 'performance', label: 'Performance Marketing', icon: TrendingUp },
+    { value: 'tech', label: 'Custom Tech Solutions', icon: Settings },
   ]
 
   const handleFormSubmit = async (data: FormSchemaType) => {
@@ -75,8 +91,9 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, quizAnswers }) => {
             <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-6">
               {/* Name Field */}
               <div>
-                <label className="form-label">
-                  👋 What should we call you?
+                <label className="form-label flex items-center gap-2">
+                  <Hand className="w-4 h-4 text-teal-600" />
+                  What should we call you?
                 </label>
                 <div className="relative">
                   <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -94,8 +111,9 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, quizAnswers }) => {
 
               {/* Email Field */}
               <div>
-                <label className="form-label">
-                  📬 Where can we reach you?
+                <label className="form-label flex items-center gap-2">
+                  <MapPin className="w-4 h-4 text-teal-600" />
+                  Where can we reach you?
                 </label>
                 <div className="relative">
                   <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -113,30 +131,51 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, quizAnswers }) => {
 
               {/* Service Selection */}
               <div>
-                <label className="form-label">
-                  📂 What type of support are you looking for?
+                <label className="form-label flex items-center gap-2">
+                  <FolderOpen className="w-4 h-4 text-teal-600" />
+                  What type of support are you looking for?
                 </label>
                 <div className="grid gap-3">
-                  {services.map((service) => (
-                    <label
-                      key={service.value}
-                      className="flex items-center p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-electric transition-colors duration-300"
-                    >
-                      <input
-                        {...register('service')}
-                        type="radio"
-                        value={service.value}
-                        className="sr-only"
-                      />
-                      <div className="flex items-center gap-3 w-full">
-                        <div className="text-2xl">{service.icon}</div>
-                        <span className="font-medium text-charcoal">{service.label}</span>
-                      </div>
-                      <div className="w-4 h-4 border-2 border-gray-300 rounded-full flex items-center justify-center">
-                        <div className="w-2 h-2 bg-electric rounded-full opacity-0 peer-checked:opacity-100 transition-opacity duration-300"></div>
-                      </div>
-                    </label>
-                  ))}
+                  {services.map((service) => {
+                    const IconComponent = service.icon
+                    const isSelected = selectedService === service.value
+                    return (
+                      <label
+                        key={service.value}
+                        className={`flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all duration-300 ${
+                          isSelected 
+                            ? 'border-teal-600 bg-teal-50' 
+                            : 'border-gray-200 hover:border-teal-300'
+                        }`}
+                      >
+                        <input
+                          {...register('service')}
+                          type="radio"
+                          value={service.value}
+                          className="sr-only"
+                        />
+                        <div className="flex items-center gap-3 w-full">
+                          <div className={`p-2 rounded-lg transition-colors duration-300 ${
+                            isSelected ? 'bg-teal-100' : 'bg-gray-100'
+                          }`}>
+                            <IconComponent className={`w-5 h-5 ${
+                              isSelected ? 'text-teal-600' : 'text-gray-600'
+                            }`} />
+                          </div>
+                          <span className={`font-medium transition-colors duration-300 ${
+                            isSelected ? 'text-teal-900' : 'text-charcoal'
+                          }`}>{service.label}</span>
+                        </div>
+                        <div className={`w-4 h-4 border-2 rounded-full flex items-center justify-center transition-all duration-300 ${
+                          isSelected ? 'border-teal-600' : 'border-gray-300'
+                        }`}>
+                          {isSelected && (
+                            <div className="w-2 h-2 bg-teal-600 rounded-full"></div>
+                          )}
+                        </div>
+                      </label>
+                    )
+                  })}
                 </div>
                 {errors.service && (
                   <p className="text-red-500 text-sm mt-1">{errors.service.message}</p>
@@ -152,8 +191,9 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, quizAnswers }) => {
                   className="space-y-4"
                 >
                   <div>
-                    <label className="form-label">
-                      📅 What's your timeline?
+                    <label className="form-label flex items-center gap-2">
+                      <Calendar className="w-4 h-4 text-teal-600" />
+                      What's your timeline?
                     </label>
                     <div className="relative">
                       <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -170,8 +210,9 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, quizAnswers }) => {
                   </div>
 
                   <div>
-                    <label className="form-label">
-                      🎯 What's the scope?
+                    <label className="form-label flex items-center gap-2">
+                      <Target className="w-4 h-4 text-teal-600" />
+                      What's the scope?
                     </label>
                     <div className="relative">
                       <Target className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -192,8 +233,9 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, quizAnswers }) => {
 
               {/* Message Field */}
               <div>
-                <label className="form-label">
-                  🧠 Tell us more about your project
+                <label className="form-label flex items-center gap-2">
+                  <Brain className="w-4 h-4 text-teal-600" />
+                  Tell us more about your project
                 </label>
                 <div className="relative">
                   <MessageSquare className="absolute left-3 top-3 text-gray-400 w-5 h-5" />
@@ -225,7 +267,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, quizAnswers }) => {
                 ) : (
                   <>
                     <Send className="w-5 h-5" />
-                    🚀 Let's Talk
+                    Let's Talk
                   </>
                 )}
               </motion.button>
@@ -242,7 +284,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, quizAnswers }) => {
             {/* Image */}
             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
               <img
-                src="https://images.unsplash.com/photo-1556745753-b2904692b3cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
                 alt="Marketing team collaboration"
                 className="w-full h-64 object-cover"
               />
