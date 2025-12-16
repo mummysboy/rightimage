@@ -9,7 +9,9 @@ import StickyCTA from './StickyCTA'
 export interface FormData {
   name: string
   email: string
-  service: string
+  services: string[]
+  issues?: string[]
+  budget?: string
   message: string
   timeline?: string
   scope?: string

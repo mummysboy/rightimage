@@ -5,6 +5,7 @@ import ServicesPage from './pages/ServicesPage'
 import ApproachPage from './pages/ApproachPage'
 import ResultsPage from './pages/ResultsPage'
 import ContactPage from './pages/ContactPage'
+import LoginPage from './pages/LoginPage'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/approach" element={<ApproachPage />} />
           <Route path="/results" element={<ResultsPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/login" element={<LoginPage />} />
         </Routes>
       </div>
     </Router>

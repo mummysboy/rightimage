@@ -9,7 +9,7 @@ const WorkPreview: React.FC = () => {
       title: 'Nova Financial',
       category: 'Brand Identity',
       description: 'Complete visual system for a next-generation fintech platform.',
-      image: 'https://images.unsplash.com/photo-1607082349566-187342175e2f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
       metrics: '+340% brand recognition',
       color: 'from-blue-500/20 to-purple-500/20'
     },
@@ -18,7 +18,7 @@ const WorkPreview: React.FC = () => {
       title: 'Echo Campaign',
       category: 'Performance Marketing',
       description: 'Multi-channel campaign system driving sustainable growth.',
-      image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
       metrics: '+127% conversion rate',
       color: 'from-green-500/20 to-emerald-500/20'
     },
@@ -27,7 +27,7 @@ const WorkPreview: React.FC = () => {
       title: 'Pulse Platform',
       category: 'Custom Tech',
       description: 'Scalable infrastructure powering real-time analytics.',
-      image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
       metrics: '99.9% uptime achieved',
       color: 'from-orange-500/20 to-red-500/20'
     }

@@ -12,7 +12,7 @@ const Results: React.FC = () => {
       title: 'Category Keyword Dominance',
       category: 'Keyword Strategy',
       description: 'Category keywords dominate clicks as ads drive impressions and conversions across the Amazon ecosystem.',
-      image: 'https://images.unsplash.com/photo-1607082349566-187342175e2f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
       metrics: [
         { label: 'Share of Voice', value: 340, suffix: '%' },
         { label: 'Click Growth', value: 62, suffix: '%' }
@@ -23,7 +23,7 @@ const Results: React.FC = () => {
       title: 'NTB Acquisition',
       category: 'New to Brand',
       description: 'Driving spend away from branded keywords into category keywords for New to Brand customer acquisition.',
-      image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      image: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
       metrics: [
         { label: 'NTB Rate', value: 127, suffix: '%' },
         { label: 'ROAS', value: 240, suffix: '%' }
@@ -34,7 +34,7 @@ const Results: React.FC = () => {
       title: 'Sales Velocity Optimization',
       category: 'Performance',
       description: 'Driving sales velocity where competitors are not, spending where competition is lowest to drive incremental sales.',
-      image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      image: 'https://images.unsplash.com/photo-1556761175-4b46a572b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
       metrics: [
         { label: 'Organic Sales', value: 99.9, suffix: '%' },
         { label: 'Ranking Improvement', value: 38, suffix: '%' }

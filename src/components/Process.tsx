@@ -13,13 +13,13 @@ const Process: React.FC = () => {
     {
       title: 'Budgets and Mix',
       description: 'Full funnel media mix and budget planning that aligns with business needs.',
-      image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      image: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
       details: 'Strategic budget allocation across the full marketing funnel. We plan media mix and budgets that align with your business needs and maximize ROI at every stage of the customer journey.'
     },
     {
       title: 'Tactics and Execution',
       description: 'Tactics, ad types, placements, and targets informed by retail media goals, mix and budget.',
-      image: 'https://images.unsplash.com/photo-1607082349566-187342175e2f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
       details: 'Precision execution of tactics, ad types, placements, and targeting strategies. Every campaign is informed by your retail media goals, budget allocation, and media mix to drive optimal performance.'
     },
     {
@@ -126,25 +126,9 @@ const Process: React.FC = () => {
                       <h3 className="text-2xl lg:text-3xl font-medium text-gray-900 mb-6">
                         {step.title}
                       </h3>
-                      <p className="text-gray-600 leading-relaxed font-light text-lg mb-6">
+                      <p className="text-gray-600 leading-relaxed font-light text-lg">
                         {step.details}
                       </p>
-                      
-                      {/* Key Benefits */}
-                      <div className="space-y-3">
-                        <div className="flex items-center gap-3">
-                          <div className="w-2 h-2 bg-teal-600 rounded-full"></div>
-                          <span className="text-sm font-medium text-gray-700">Data-Driven</span>
-                        </div>
-                        <div className="flex items-center gap-3">
-                          <div className="w-2 h-2 bg-teal-600 rounded-full"></div>
-                          <span className="text-sm font-medium text-gray-700">KPI Focused</span>
-                        </div>
-                        <div className="flex items-center gap-3">
-                          <div className="w-2 h-2 bg-teal-600 rounded-full"></div>
-                          <span className="text-sm font-medium text-gray-700">Results Oriented</span>
-                        </div>
-                      </div>
                     </div>
                   </div>
                 </div>

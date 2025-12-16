@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { 
   Send, 
   Mail, 
@@ -18,6 +18,9 @@ import {
   TrendingUp, 
   Settings, 
   Brain,
+  DollarSign,
+  CheckCircle2,
+  ChevronDown,
   LucideIcon
 } from 'lucide-react'
 import { FormData } from './ContactPage'
@@ -30,7 +33,9 @@ interface ContactFormProps {
 const formSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
   email: z.string().email('Please enter a valid email address'),
-  service: z.string().min(1, 'Please select a service'),
+  services: z.array(z.string()).min(1, 'Please select at least one service'),
+  issues: z.array(z.string()).optional(),
+  budget: z.string().optional(),
   message: z.string().min(10, 'Message must be at least 10 characters'),
   timeline: z.string().optional(),
   scope: z.string().optional(),
@@ -43,12 +48,21 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, quizAnswers }) => {
     register,
     handleSubmit,
     watch,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm<FormSchemaType>({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      services: [],
+      issues: [],
+    },
   })
 
-  const selectedService = watch('service')
+  const selectedServices = watch('services') || []
+  const selectedIssues = watch('issues') || []
+  const selectedBudget = watch('budget') || ''
+  const [isBudgetOpen, setIsBudgetOpen] = useState(false)
+  const budgetDropdownRef = useRef<HTMLDivElement>(null)
 
   const services: Array<{ value: string; label: string; icon: LucideIcon }> = [
     { value: 'branding', label: 'Branding & Identity', icon: Palette },
@@ -56,6 +70,60 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, quizAnswers }) => {
     { value: 'performance', label: 'Performance Marketing', icon: TrendingUp },
     { value: 'tech', label: 'Custom Tech Solutions', icon: Settings },
   ]
+
+  const issues: Array<{ value: string; label: string }> = [
+    { value: 'low-traffic', label: 'Low website traffic' },
+    { value: 'low-conversion', label: 'Low conversion rates' },
+    { value: 'brand-awareness', label: 'Lack of brand awareness' },
+    { value: 'competition', label: 'High competition' },
+    { value: 'roas', label: 'Poor ROAS/ROI' },
+    { value: 'budget-optimization', label: 'Budget optimization needed' },
+    { value: 'ad-performance', label: 'Underperforming ads' },
+    { value: 'strategy', label: 'Need strategic direction' },
+  ]
+
+  const budgetOptions: Array<{ value: string; label: string }> = [
+    { value: 'under-5k', label: 'Under $5,000/month' },
+    { value: '5k-10k', label: '$5,000 - $10,000/month' },
+    { value: '10k-25k', label: '$10,000 - $25,000/month' },
+    { value: '25k-50k', label: '$25,000 - $50,000/month' },
+    { value: '50k-100k', label: '$50,000 - $100,000/month' },
+    { value: '100k-plus', label: '$100,000+/month' },
+  ]
+
+  const selectedBudgetLabel = budgetOptions.find(opt => opt.value === selectedBudget)?.label || 'Select budget range'
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (budgetDropdownRef.current && !budgetDropdownRef.current.contains(event.target as Node)) {
+        setIsBudgetOpen(false)
+      }
+    }
+
+    if (isBudgetOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [isBudgetOpen])
+
+  const handleServiceToggle = (value: string) => {
+    const current = selectedServices
+    const updated = current.includes(value)
+      ? current.filter((s) => s !== value)
+      : [...current, value]
+    setValue('services', updated)
+  }
+
+  const handleIssueToggle = (value: string) => {
+    const current = selectedIssues
+    const updated = current.includes(value)
+      ? current.filter((i) => i !== value)
+      : [...current, value]
+    setValue('issues', updated)
+  }
 
   const handleFormSubmit = async (data: FormSchemaType) => {
     // Simulate API call
@@ -89,6 +157,10 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, quizAnswers }) => {
             className="space-y-6"
           >
             <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-6">
+              {/* Hidden inputs for arrays */}
+              <input type="hidden" {...register('services')} />
+              <input type="hidden" {...register('issues')} />
+              
               {/* Name Field */}
               <div>
                 <label className="form-label flex items-center gap-2">
@@ -129,31 +201,26 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, quizAnswers }) => {
                 )}
               </div>
 
-              {/* Service Selection */}
+              {/* Service Selection - Multiple */}
               <div>
                 <label className="form-label flex items-center gap-2">
                   <FolderOpen className="w-4 h-4 text-teal-600" />
-                  What type of support are you looking for?
+                  What type of support are you looking for? (Select all that apply)
                 </label>
                 <div className="grid gap-3">
                   {services.map((service) => {
                     const IconComponent = service.icon
-                    const isSelected = selectedService === service.value
+                    const isSelected = selectedServices.includes(service.value)
                     return (
                       <label
                         key={service.value}
+                        onClick={() => handleServiceToggle(service.value)}
                         className={`flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all duration-300 ${
                           isSelected 
                             ? 'border-teal-600 bg-teal-50' 
                             : 'border-gray-200 hover:border-teal-300'
                         }`}
                       >
-                        <input
-                          {...register('service')}
-                          type="radio"
-                          value={service.value}
-                          className="sr-only"
-                        />
                         <div className="flex items-center gap-3 w-full">
                           <div className={`p-2 rounded-lg transition-colors duration-300 ${
                             isSelected ? 'bg-teal-100' : 'bg-gray-100'
@@ -166,24 +233,134 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, quizAnswers }) => {
                             isSelected ? 'text-teal-900' : 'text-charcoal'
                           }`}>{service.label}</span>
                         </div>
-                        <div className={`w-4 h-4 border-2 rounded-full flex items-center justify-center transition-all duration-300 ${
-                          isSelected ? 'border-teal-600' : 'border-gray-300'
+                        <div className={`w-5 h-5 border-2 rounded flex items-center justify-center transition-all duration-300 ${
+                          isSelected ? 'border-teal-600 bg-teal-600' : 'border-gray-300'
                         }`}>
                           {isSelected && (
-                            <div className="w-2 h-2 bg-teal-600 rounded-full"></div>
+                            <CheckCircle2 className="w-4 h-4 text-white" />
                           )}
                         </div>
                       </label>
                     )
                   })}
                 </div>
-                {errors.service && (
-                  <p className="text-red-500 text-sm mt-1">{errors.service.message}</p>
+                {errors.services && (
+                  <p className="text-red-500 text-sm mt-1">{errors.services.message}</p>
                 )}
               </div>
 
+              {/* Estimated Monthly Ad Budget */}
+              <div>
+                <label className="form-label flex items-center gap-2">
+                  <DollarSign className="w-4 h-4 text-teal-600" />
+                  Estimated Monthly Ad Budget
+                </label>
+                <div className="relative" ref={budgetDropdownRef}>
+                  <input type="hidden" {...register('budget')} />
+                  <button
+                    type="button"
+                    onClick={() => setIsBudgetOpen(!isBudgetOpen)}
+                    className={`w-full form-input pl-10 pr-10 text-left flex items-center justify-between transition-all duration-300 ${
+                      selectedBudget 
+                        ? 'border-teal-600 bg-teal-50' 
+                        : 'border-gray-200 hover:border-teal-300'
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <DollarSign className="text-gray-400 w-5 h-5" />
+                      <span className={selectedBudget ? 'text-teal-900 font-medium' : 'text-gray-500'}>
+                        {selectedBudgetLabel}
+                      </span>
+                    </div>
+                    <ChevronDown 
+                      className={`w-5 h-5 text-gray-400 transition-transform duration-300 ${
+                        isBudgetOpen ? 'transform rotate-180' : ''
+                      }`} 
+                    />
+                  </button>
+                  
+                  <AnimatePresence>
+                    {isBudgetOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.2 }}
+                        className="absolute z-50 w-full mt-2 bg-white border-2 border-gray-200 rounded-lg shadow-xl overflow-hidden"
+                      >
+                        <div className="py-2">
+                          {budgetOptions.map((option, index) => {
+                            const isSelected = selectedBudget === option.value
+                            return (
+                              <motion.button
+                                key={option.value}
+                                type="button"
+                                onClick={() => {
+                                  setValue('budget', option.value)
+                                  setIsBudgetOpen(false)
+                                }}
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: index * 0.05 }}
+                                className={`w-full px-4 py-3 text-left flex items-center justify-between hover:bg-teal-50 transition-colors duration-200 ${
+                                  isSelected ? 'bg-teal-50' : ''
+                                }`}
+                              >
+                                <span className={`font-medium transition-colors duration-200 ${
+                                  isSelected ? 'text-teal-900' : 'text-charcoal'
+                                }`}>
+                                  {option.label}
+                                </span>
+                                {isSelected && (
+                                  <CheckCircle2 className="w-5 h-5 text-teal-600" />
+                                )}
+                              </motion.button>
+                            )
+                          })}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              </div>
+
+              {/* Issues/Concerns - Multiple Selection */}
+              <div>
+                <label className="form-label flex items-center gap-2">
+                  <Target className="w-4 h-4 text-teal-600" />
+                  What challenges are you facing? (Select all that apply)
+                </label>
+                <div className="grid gap-3">
+                  {issues.map((issue) => {
+                    const isSelected = selectedIssues.includes(issue.value)
+                    return (
+                      <label
+                        key={issue.value}
+                        onClick={() => handleIssueToggle(issue.value)}
+                        className={`flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all duration-300 ${
+                          isSelected 
+                            ? 'border-teal-600 bg-teal-50' 
+                            : 'border-gray-200 hover:border-teal-300'
+                        }`}
+                      >
+                        <span className={`font-medium transition-colors duration-300 flex-1 ${
+                          isSelected ? 'text-teal-900' : 'text-charcoal'
+                        }`}>{issue.label}</span>
+                        <div className={`w-5 h-5 border-2 rounded flex items-center justify-center transition-all duration-300 ${
+                          isSelected ? 'border-teal-600 bg-teal-600' : 'border-gray-300'
+                        }`}>
+                          {isSelected && (
+                            <CheckCircle2 className="w-4 h-4 text-white" />
+                          )}
+                        </div>
+                      </label>
+                    )
+                  })}
+                </div>
+              </div>
+
               {/* Conditional Tech Fields */}
-              {selectedService === 'tech' && (
+              {selectedServices.includes('tech') && (
                 <motion.div
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: 'auto' }}
@@ -284,9 +461,9 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, quizAnswers }) => {
             {/* Image */}
             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
               <img
-                src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
+                src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
                 alt="Marketing team collaboration"
-                className="w-full h-64 object-cover"
+                className="w-full h-64 object-cover blur-sm"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-charcoal/60 to-transparent"></div>
               <div className="absolute bottom-6 left-6 text-white">

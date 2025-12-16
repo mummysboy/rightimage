@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { motion } from 'framer-motion'
-import { CheckCircle, Calendar, Mail, Phone } from 'lucide-react'
+import { CheckCircle, Mail, Phone } from 'lucide-react'
 import { FormData } from './ContactPage'
 
 interface SuccessMessageProps {
@@ -8,13 +8,6 @@ interface SuccessMessageProps {
 }
 
 const SuccessMessage: React.FC<SuccessMessageProps> = ({ formData }) => {
-  const [showCalendly, setShowCalendly] = useState(false)
-
-  useEffect(() => {
-    // Show Calendly prompt after 3 seconds
-    const timer = setTimeout(() => setShowCalendly(true), 3000)
-    return () => clearTimeout(timer)
-  }, [])
 
   return (
     <section className="min-h-screen bg-gradient-to-br from-electric to-blue-600 flex items-center justify-center section-padding">
@@ -94,29 +87,6 @@ const SuccessMessage: React.FC<SuccessMessageProps> = ({ formData }) => {
             </div>
           </div>
 
-          {/* Calendly Integration */}
-          {showCalendly && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20"
-            >
-              <h3 className="text-xl font-semibold mb-4">Ready to move faster?</h3>
-              <p className="mb-4 opacity-90">
-                Schedule a call now and get started immediately.
-              </p>
-              <button
-                onClick={() => {
-                  // In a real app, this would open Calendly
-                  window.open('https://calendly.com/rightimagedigital/consultation', '_blank')
-                }}
-                className="btn-primary inline-flex items-center gap-3"
-              >
-                <Calendar className="w-5 h-5" />
-                Schedule a Call Now
-              </button>
-            </motion.div>
-          )}
 
           {/* Contact Info */}
           <div className="text-sm opacity-80">

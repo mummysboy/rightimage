@@ -31,7 +31,7 @@ const Header: React.FC = () => {
       className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${
         isScrolled 
           ? 'bg-white/95 backdrop-blur-md shadow-sm' 
-          : 'bg-transparent'
+          : 'bg-black/40 backdrop-blur-sm lg:bg-black/50'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -85,6 +85,22 @@ const Header: React.FC = () => {
                 </Link>
               </motion.div>
             ))}
+            
+            {/* Sign In */}
+            <motion.div
+              whileHover={{ y: -2 }}
+            >
+              <Link
+                to="/login"
+                className={`text-sm font-medium tracking-wide uppercase transition-colors duration-300 relative z-[110] cursor-pointer ${
+                  isScrolled 
+                    ? 'text-gray-900 hover:text-teal-600' 
+                    : 'text-white hover:text-teal-300'
+                }`}
+              >
+                Sign In
+              </Link>
+            </motion.div>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -132,6 +148,19 @@ const Header: React.FC = () => {
                     </Link>
                   </motion.div>
                 ))}
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: navItems.length * 0.1 }}
+                >
+                  <Link
+                    to="/login"
+                    className="block text-lg font-medium tracking-wide uppercase text-gray-900 hover:text-teal-600 transition-colors duration-300 relative z-[110] cursor-pointer"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Sign In
+                  </Link>
+                </motion.div>
               </nav>
             </motion.div>
           )}
