@@ -10,13 +10,11 @@ import {
   Target, 
   Zap, 
   Lightbulb, 
-  SkipForward,
   LucideIcon
 } from 'lucide-react'
 
 interface BrandQuizProps {
   onComplete: (answers: { brandStatus: string; priorities: string }) => void
-  onSkip: () => void
 }
 
 interface QuizOption {
@@ -26,7 +24,7 @@ interface QuizOption {
   icon: LucideIcon
 }
 
-const BrandQuiz: React.FC<BrandQuizProps> = ({ onComplete, onSkip }) => {
+const BrandQuiz: React.FC<BrandQuizProps> = ({ onComplete }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [answers, setAnswers] = useState<{ brandStatus: string; priorities: string }>({
     brandStatus: '',
@@ -152,21 +150,6 @@ const BrandQuiz: React.FC<BrandQuizProps> = ({ onComplete, onSkip }) => {
           </div>
         </motion.div>
 
-        {/* Skip Button */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-          className="text-center"
-        >
-          <button
-            onClick={onSkip}
-            className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors duration-300"
-          >
-            <SkipForward className="w-4 h-4" />
-            <span>Skip quiz</span>
-          </button>
-        </motion.div>
       </div>
     </section>
   )

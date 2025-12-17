@@ -4,7 +4,6 @@ import HeroSection from './HeroSection'
 import BrandQuiz from './BrandQuiz'
 import ContactForm from './ContactForm'
 import SuccessMessage from './SuccessMessage'
-import StickyCTA from './StickyCTA'
 
 export interface FormData {
   name: string
@@ -18,7 +17,7 @@ export interface FormData {
 }
 
 const ContactPage: React.FC = () => {
-  const [currentStep, setCurrentStep] = useState<'hero' | 'quiz' | 'form' | 'success'>('hero')
+  const [currentStep, setCurrentStep] = useState<'hero' | 'quiz' | 'form' | 'success'>('quiz')
   const [quizAnswers, setQuizAnswers] = useState<{ brandStatus: string; priorities: string } | null>(null)
   const [formData, setFormData] = useState<FormData | null>(null)
 
@@ -36,9 +35,6 @@ const ContactPage: React.FC = () => {
     setCurrentStep('quiz')
   }
 
-  const handleSkipQuiz = () => {
-    setCurrentStep('form')
-  }
 
   return (
     <div className="relative">
@@ -52,7 +48,6 @@ const ContactPage: React.FC = () => {
         >
           <HeroSection 
             onStartConversation={handleStartConversation}
-            onSkipQuiz={handleSkipQuiz}
           />
         </motion.div>
       )}
@@ -67,7 +62,6 @@ const ContactPage: React.FC = () => {
         >
           <BrandQuiz 
             onComplete={handleQuizComplete}
-            onSkip={handleSkipQuiz}
           />
         </motion.div>
       )}
@@ -98,10 +92,6 @@ const ContactPage: React.FC = () => {
         </motion.div>
       )}
 
-      {/* Sticky CTA - Show on all steps except success */}
-      {currentStep !== 'success' && (
-        <StickyCTA onStartConversation={handleStartConversation} />
-      )}
     </div>
   )
 }

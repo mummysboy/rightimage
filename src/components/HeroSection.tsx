@@ -4,10 +4,9 @@ import { Rocket } from 'lucide-react'
 
 interface HeroSectionProps {
   onStartConversation: () => void
-  onSkipQuiz: () => void
 }
 
-const HeroSection: React.FC<HeroSectionProps> = ({ onStartConversation, onSkipQuiz }) => {
+const HeroSection: React.FC<HeroSectionProps> = ({ onStartConversation }) => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image */}
@@ -41,26 +40,6 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onStartConversation, onSkipQu
           Contact Right Image Digital and take the first step to a sharper, smarter presence.
         </motion.p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
-        >
-          <button
-            onClick={onStartConversation}
-            className="btn-primary inline-flex items-center gap-3 group"
-          >
-            <Rocket className="w-6 h-6 group-hover:rotate-12 transition-transform duration-300" />
-            Start Quiz
-          </button>
-          <button
-            onClick={onSkipQuiz}
-            className="text-white border-2 border-white/30 hover:border-white/60 px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:bg-white/10"
-          >
-            Skip Quiz
-          </button>
-        </motion.div>
       </div>
     </section>
   )
