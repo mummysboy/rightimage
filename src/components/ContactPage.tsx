@@ -50,7 +50,10 @@ const ContactPage: React.FC = () => {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <HeroSection onStartConversation={handleStartConversation} />
+          <HeroSection 
+            onStartConversation={handleStartConversation}
+            onSkipQuiz={handleSkipQuiz}
+          />
         </motion.div>
       )}
 

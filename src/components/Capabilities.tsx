@@ -63,7 +63,7 @@ const Capabilities: React.FC = () => {
           className="text-center mb-20"
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-gray-900 mb-6 tracking-tight">
-            Extraordinary Service
+            Boutique Service
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto font-light">
             AN EXTENSION OF YOUR TEAM

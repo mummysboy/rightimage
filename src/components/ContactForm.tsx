@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { motion, AnimatePresence } from 'framer-motion'
+import emailjs from '@emailjs/browser'
 import { 
   Send, 
   Mail, 
@@ -68,18 +69,18 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, quizAnswers }) => {
     { value: 'branding', label: 'Branding & Identity', icon: Palette },
     { value: 'campaign', label: 'Campaign Strategy', icon: Megaphone },
     { value: 'performance', label: 'Performance Marketing', icon: TrendingUp },
+    { value: 'amazon-ads', label: 'Amazon Ads Management', icon: Megaphone },
+    { value: 'amazon-seo', label: 'Amazon SEO & Listing Optimization', icon: TrendingUp },
+    { value: 'amazon-consulting', label: 'Amazon Seller Consulting', icon: Target },
     { value: 'tech', label: 'Custom Tech Solutions', icon: Settings },
   ]
 
   const issues: Array<{ value: string; label: string }> = [
-    { value: 'low-traffic', label: 'Low website traffic' },
+    { value: 'low-dpvr', label: 'Low DPVR - Detail Page View Rate' },
+    { value: 'amazon-ranking', label: 'Amazon ranking challenges' },
+    { value: 'amazon-ppc', label: 'Amazon PPC optimization' },
     { value: 'low-conversion', label: 'Low conversion rates' },
-    { value: 'brand-awareness', label: 'Lack of brand awareness' },
-    { value: 'competition', label: 'High competition' },
     { value: 'roas', label: 'Poor ROAS/ROI' },
-    { value: 'budget-optimization', label: 'Budget optimization needed' },
-    { value: 'ad-performance', label: 'Underperforming ads' },
-    { value: 'strategy', label: 'Need strategic direction' },
   ]
 
   const budgetOptions: Array<{ value: string; label: string }> = [
@@ -126,9 +127,129 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, quizAnswers }) => {
   }
 
   const handleFormSubmit = async (data: FormSchemaType) => {
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000))
-    onSubmit(data)
+    try {
+      // Format services list
+      const servicesLabels = services
+        .filter(s => data.services.includes(s.value))
+        .map(s => s.label)
+        .join(', ')
+
+      // Format issues list
+      const issuesLabels = issues
+        .filter(i => data.issues?.includes(i.value))
+        .map(i => i.label)
+        .join(', ')
+
+      // Format budget
+      const budgetLabel = budgetOptions.find(opt => opt.value === data.budget)?.label || 'Not specified'
+
+      // Format timeline and scope
+      const timelineLabel = data.timeline 
+        ? data.timeline === 'urgent' ? 'Urgent (1-2 weeks)' 
+          : data.timeline === 'standard' ? 'Standard (1-2 months)' 
+          : 'Flexible (3+ months)'
+        : 'Not specified'
+
+      const scopeLabel = data.scope
+        ? data.scope === 'small' ? 'Small project'
+          : data.scope === 'medium' ? 'Medium project'
+          : data.scope === 'large' ? 'Large project'
+          : 'Enterprise solution'
+        : 'Not specified'
+
+      // Prepare email template parameters
+      // All form fields are available as individual template variables for custom formatting
+      const templateParams = {
+        // Basic contact info
+        name: data.name,
+        email: data.email,
+        title: `New Contact Form Submission from ${data.name}`,
+        time: new Date().toLocaleString(),
+        
+        // Services (formatted)
+        services: servicesLabels || 'None selected',
+        services_list: services
+          .filter(s => data.services.includes(s.value))
+          .map(s => s.label)
+          .join('\n• ') || 'None selected',
+        
+        // Challenges/Issues (formatted)
+        issues: issuesLabels || 'None selected',
+        issues_list: issues
+          .filter(i => data.issues?.includes(i.value))
+          .map(i => i.label)
+          .join('\n• ') || 'None selected',
+        
+        // Budget, timeline, and scope
+        budget: budgetLabel,
+        timeline: timelineLabel,
+        scope: scopeLabel,
+        
+        // User's message
+        message: data.message,
+        
+        // Quiz answers (if available)
+        quiz_brand_status: quizAnswers?.brandStatus || 'Not completed',
+        quiz_priorities: quizAnswers?.priorities || 'Not completed',
+        
+        // Pre-formatted message (backup - contains everything in one string)
+        formatted_message: `
+Name: ${data.name}
+Email: ${data.email}
+
+Services Interested In: ${servicesLabels}
+
+Challenges Facing:
+${issuesLabels || 'None selected'}
+
+Monthly Ad Budget: ${budgetLabel}
+${data.timeline ? `Timeline: ${timelineLabel}` : ''}
+${data.scope ? `Scope: ${scopeLabel}` : ''}
+
+Message:
+${data.message}
+
+${quizAnswers ? `
+Quiz Answers:
+- Brand Status: ${quizAnswers.brandStatus}
+- Priorities: ${quizAnswers.priorities}
+` : ''}
+        `.trim(),
+      }
+
+      // Send email using EmailJS
+      // You'll need to set these up in your EmailJS account and add them to .env file
+      const serviceId = (import.meta.env.VITE_EMAILJS_SERVICE_ID as string) || ''
+      const templateId = (import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string) || ''
+      const publicKey = (import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string) || ''
+
+      // Only send email if credentials are configured
+      if (serviceId && templateId && publicKey && serviceId !== 'YOUR_SERVICE_ID') {
+        try {
+          await emailjs.send(
+            serviceId,
+            templateId,
+            templateParams,
+            publicKey
+          )
+          console.log('Email sent successfully')
+        } catch (emailError) {
+          console.error('Failed to send email:', emailError)
+          // Log error but don't block form submission
+          // In production, you might want to show an error toast or notification
+        }
+      } else {
+        console.warn('EmailJS credentials not configured. Please set VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_TEMPLATE_ID, and VITE_EMAILJS_PUBLIC_KEY in your .env file')
+        // In development, you might want to show a warning
+      }
+
+      // Call the original onSubmit handler regardless of email status
+      onSubmit(data)
+    } catch (error) {
+      console.error('Form submission error:', error)
+      // Still call onSubmit to show success message
+      onSubmit(data)
+    }
   }
 
   return (

@@ -1,6 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { MessageCircle } from 'lucide-react'
+import { Rocket } from 'lucide-react'
 
 interface StickyCTAProps {
   onStartConversation: () => void
@@ -18,8 +18,8 @@ const StickyCTA: React.FC<StickyCTAProps> = ({ onStartConversation }) => {
         onClick={onStartConversation}
         className="bg-electric text-white px-6 py-4 rounded-full shadow-2xl flex items-center gap-3 font-semibold hover:bg-blue-600 transition-colors duration-300 hover:scale-105 active:scale-95"
       >
-        <MessageCircle className="w-5 h-5" />
-        Let's Talk
+        <Rocket className="w-5 h-5" />
+        Start Quiz
       </button>
     </motion.div>
   )
