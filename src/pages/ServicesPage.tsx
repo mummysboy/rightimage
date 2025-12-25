@@ -1,7 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
-import { Target, TrendingUp, BarChart3, Users, CheckCircle2 } from 'lucide-react'
+import { Target, TrendingUp, BarChart3, Users, CheckCircle2, FileText } from 'lucide-react'
 import Header from '../components/Header'
 import FooterCTA from '../components/FooterCTA'
 
@@ -118,6 +118,40 @@ const ServicesPage: React.FC = () => {
             >
               We provide connected strategies across the entire Amazon ecosystem to help our clients achieve transformational growth
             </motion.p>
+          </div>
+        </section>
+
+        {/* Pitch Deck Section */}
+        <section className="py-16 bg-teal-50">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="bg-white rounded-2xl p-8 lg:p-12 shadow-sm"
+            >
+              <div className="w-16 h-16 bg-teal-100 rounded-xl flex items-center justify-center mx-auto mb-6">
+                <FileText className="w-8 h-8 text-teal-600" />
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-light text-gray-900 mb-4 tracking-tight">
+                Learn More About Right Image
+              </h2>
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto font-light mb-8">
+                Discover our comprehensive approach, success stories, and how we can help transform your Amazon business
+              </p>
+              <motion.a
+                href="/Right%20Image%20Overview%20_%2020251223.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-flex items-center gap-3 bg-teal-600 hover:bg-teal-700 text-white px-8 py-4 rounded-xl font-medium transition-colors duration-200 shadow-sm hover:shadow-md"
+              >
+                <FileText className="w-5 h-5" />
+                View Our Pitch Deck
+              </motion.a>
+            </motion.div>
           </div>
         </section>
 
